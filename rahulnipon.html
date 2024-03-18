@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+  <style>
+   #options{
+    display: grid;
+    grid-template-columns: repeat(3,minmax(100px,1fr));
+    gap: 15px;
+   }
+
+   #options img{
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+   }
+
+   #options img:nth-child(3n+1){
+    grid-row: span 2;
+   }
+
+   #optios img:nth-child(n+2){
+    grid-column: span 2;
+   }
+
+   #LIST{
+    border: 1px solid black;
+   }
+
+ 
+
+  </style>
+
+<div class="flex">
+    <input onkeyup="Search(this.value)" id="INPUT" type="text" list="options">
+    <button id="BTN">Search</button>
+    <div id="LIST"></div>
+
+    <div id="options">
+
+    </div>
+</div>
+
+<script>
+//   const LIST = document.getElementById("LIST")
+//   const INPUT = document.getElementById("INPUT")
+//   const BTN = document.getElementById("BTN")
+//   const dataList = document.getElementById("options");
+  
+
+// function PIC(nam = 'nature') {
+    
+//     dataList.innerHTML = "";
+
+//     const url = `https://pixabay.com/api/?key=37751582-2d5c45858694200b38b39ca6c&q=${nam}&image_type=photo&pretty=true`;
+
+//     function fetchData() {
+//         return fetch(url)
+//             .then((res) => res.json())
+//             .then((res) => res.hits)
+//             .catch((err) => {
+//                 console.log(err);
+//             });
+//     }
+
+//     fetchData().then((data) => {
+//         data.forEach(element => {
+//             const IMG = document.createElement("img");
+//             IMG.src = element.webformatURL;
+//             IMG.setAttribute("class", "rahul"); // Adding class 'rahul' as you've mentioned in your code
+
+//             dataList.appendChild(IMG);
+//         });
+//     });
+// }
+
+// // Call the function with an optional query parameter
+// PIC(); // This will fetch images related to 'nature' by default
+
+
+
+// async function Search(val) {
+//   LIST.innerHTML = ""
+//     const url = `https://pixabay.com/api/?key=37751582-2d5c45858694200b38b39ca6c&q=all&image_type=photo&pretty=true`;
+
+//    if (val!=""){
+//     try {
+//         const response = await fetch(url);
+//         const data = await response.json();
+//         const hits = data.hits;
+
+//         const dataAll = [];
+//         hits.forEach(e => {
+//             e.tags.split(',').forEach(tag => {
+//                 dataAll.push(tag.trim());
+//             });
+//         });
+
+//         const sug = dataAll.filter(item => item.startsWith(val));
+//         sug.forEach(it =>{
+//           const OP = document.createElement("option")
+//           OP.innerHTML = it;
+
+//           LIST.append(OP)
+//         })
+
+
+        
+//     } catch (error) {
+//         console.error(error);
+//     }
+//    }
+// }
+
+
+
+
+
+
+
+
+
+// const data = fetch(`https://pixabay.com/api/?key=37751582-2d5c45858694200b38b39ca6c&q=nature&image_type=photo&pretty=true`)
+// .then((data) => data.json())
+// .then(data=>data.hits)
+
+
+// data.then((data) => {
+//   console.log(data)
+// })
+
+
+
+
+
+
+
+
+// BTN.addEventListener("click",run)
+
+//   function run(){
+//     let val = INPUT.value;
+//     if (val!=""){
+//       PIC(val)
+//     }
+    
+//   }
+
+async function dataAll(){
+  const url = `https://pixabay.com/api/?key=37751582-2d5c45858694200b38b39ca6c&q=all&image_type=photo&pretty=true`;
+  try{
+    const response = await fetch(url);
+    const data = await response.json();
+    const hits = data.hits;
+
+    return hits
+
+
+  }catch{}
+}
+
+
+async function printData() {
+  const hits = await dataAll();
+  for (const element of hits) {
+    console.log(element);
+  }
+}
+
+printData();
+
+
+
+</script>
+</body>
+</html>
